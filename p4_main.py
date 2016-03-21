@@ -16,18 +16,22 @@ def main(argv):
     print str(err)
     print 'p4_main.py -l <row> -w <column> -d <win>'
     sys.exit(2)
-  for o, arg in opts:
-    if o == '-h':
-      print 'p4_main.py -l <row> -w <column> -d <win>'
-      sys.exit()
-    elif o in ('-l', '--row'):
-      length = int(arg)
-    elif o in ('-w', '--column'):
-      width = int(arg)
-    elif o in ('-d', '--win'):
-      win = int(arg)
-    else:
-      assert False, "Unhandled option"
+  try:
+    for o, arg in opts:
+      if o == '-h':
+        print 'p4_main.py -l <row> -w <column> -d <win>'
+        sys.exit(2)
+      elif o in ('-l', '--row'):
+        length = int(arg)
+      elif o in ('-w', '--column'):
+        width = int(arg)
+      elif o in ('-d', '--win'):
+        win = int(arg)
+      else:
+        assert False, "Unhandled option"
+  except ValueError:
+    print 'Please input numeric values'
+    sys.exit(2)
 
   turn = 0
   thelist = [[-1 for x in range(length)] for x in range(width)]

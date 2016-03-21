@@ -1,6 +1,8 @@
 This is a connect4 program in python. 
    When executing the code please use:
          ./p4_main -l <row goes here> -w <column goes here> -d <win length goes here>
+   All these values are not necessary, however, if you do not input them, they will result to default
+   values, which all are equal to 3.
 
    There are also additional commands during the gameplay. These are the save, load and quit commands.
          save ==> -s <filename>
