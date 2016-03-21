@@ -1,6 +1,5 @@
 #!/usr/bin/python
 class blah:
-
   def placeToken(self, player, column, numrow, numcolumn, thelist):
     if player == 0 or player == 1:
       if column >= 0 and column < numcolumn and numrow >= 3 and numcolumn >= 3:
@@ -26,11 +25,11 @@ class blah:
             neg = blah().negativeCheck(p,i,j,numrow,numcolumn,win,thelist)
             pos = blah().positiveCheck(p,i,j,numrow,numcolumn,win,thelist)
             if horiz == p or vert == p or neg == p or pos == p:
-              print "Player ", p, " is the winner"
+              print "Player ", p+1, " is the winner"
               return p
-            if blah().tieGame(thelist) == -2:
-              print "The game ends in a Tie. Please reset the board."
-              return -2
+      if blah().tieGame(thelist) == -2:
+        print "The game ends in a Tie. Please reset the board."
+        return -2
       return -1
     else:
       print "The length to win must be greater than 3 and less than or equal to the board size."

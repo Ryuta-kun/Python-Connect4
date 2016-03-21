@@ -34,7 +34,10 @@ def main(argv):
   
   for i in thelist:
     for j in i:
-      print '%d\t' %(j),
+      if j == -1:
+        print '.\t',
+      else:
+        print '%d\t' %(j),
     print ''
   
   while blah().winner(length,width,win,thelist) == -1:
@@ -47,7 +50,10 @@ def main(argv):
         turn = 1 if turn == 0 else 0
         for i in thelist:
           for j in i:
-            print '%d\t' %(j),
+            if j == -1:
+              print '.\t',
+            else:
+              print '%d\t' %(j),
           print ''
     except ValueError:
       try:
