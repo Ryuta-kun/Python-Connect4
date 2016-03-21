@@ -1,0 +1,14 @@
+This is a connect4 program in python. 
+   When executing the code please use:
+         ./p4_main -l <row goes here> -w <column goes here> -d <win length goes here>
+
+   There are also additional commands during the gameplay. These are the save, load and quit commands.
+         save ==> -s <filename>
+         load ==> -l <filename>
+         quit ==> -q 
+
+   Please keep in mind any strings other than the above entered will not work (unless I missed some).
+   The quit command may also prompt you with yes or no depending on whether you want to quit or not,
+   if you type in anything other than yes, it will go back to the game.
+
+I didn't really know how commenting on python would work, so on this particular project, there is no comments on any codings, but these are very similar to the ones I have done previously on C programming. 
