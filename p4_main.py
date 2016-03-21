@@ -34,7 +34,7 @@ def main(argv):
     sys.exit(2)
 
   turn = 0
-  thelist = [[-1 for x in range(length)] for x in range(width)]
+  thelist = [[-1 for x in range(width)] for x in range(length)]
   
   for i in thelist:
     for j in i:
