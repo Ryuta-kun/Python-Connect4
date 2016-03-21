@@ -66,12 +66,14 @@ def main(argv):
           width = pickle.load(fileObject)
           win = pickle.load(fileObject)
           thelist = pickle.load(fileObject)
+          turn = pickle.load(fileObject)
         elif userSplit[0] in ('-s', '--save'):
           fileObject = open(userSplit[1],'wb')
           pickle.dump(length, fileObject)
           pickle.dump(width, fileObject)
           pickle.dump(win, fileObject)
           pickle.dump(thelist,fileObject)
+          pickle.dump(turn, fileObject)
           fileObject.close()
         elif userSplit[0] in ('-q', '--quit'):
           useQ = raw_input("Are you sure you want to quit <yes or no>: ")
