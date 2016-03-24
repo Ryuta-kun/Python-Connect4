@@ -6,8 +6,10 @@ def main(argv):
   length = 3;
   width = 3;
   win = 3;
+  turn = 0
+  havelist = False #didn't know any other way to do this
   try: 
-    opts, args = getopt.getopt(sys.argv[1:], 'hl:w:d:', ['row=', 'column=', 'win='])
+    opts, args = getopt.getopt(sys.argv[1:], 'hol:w:d:', ['open=','row=', 'column=', 'win='])
     if not opts:
       print 'No options supplied'
       print 'p4_main.py -l <row> -w <column> -d <win>'
@@ -23,19 +25,36 @@ def main(argv):
         sys.exit(2)
       elif o in ('-l', '--row'):
         length = int(arg)
+        havelist = True
       elif o in ('-w', '--column'):
         width = int(arg)
+        havelist = True
       elif o in ('-d', '--win'):
         win = int(arg)
+        havelist = True
+      elif o in ('-o', '--open'):
+        data = raw_input("Open file: ")
+        fileObject = open(data,'rb')
+        length = pickle.load(fileObject)
+        width = pickle.load(fileObject)
+        win = pickle.load(fileObject)
+        thelist = pickle.load(fileObject)
+        turn = pickle.load(fileObject) 
       else:
-        assert False, "Unhandled option"
+        print "Unhandled option"
   except ValueError:
     print 'Please input numeric values'
     sys.exit(2)
+  except IOError:
+    print "File not found."
+    sys.exit(2)
+  except IndexError:
+    print "You must enter the file name."
+    sys.exit(2)
 
-  turn = 0
-  thelist = [[-1 for x in range(width)] for x in range(length)]
-  
+  if havelist == True:
+    thelist = [[-1 for x in range(width)] for x in range(length)]
+
   for i in thelist:
     for j in i:
       if j == -1:
