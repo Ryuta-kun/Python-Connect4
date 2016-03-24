@@ -1,6 +1,6 @@
 This is a connect4 program in python. 
    When executing the code please use:
-         ./p4_main -l <row goes here> -w <column goes here> -d <win length goes here>
+         ./p4_main.py -l <row goes here> -w <column goes here> -d <win length goes here>
    All these values are not necessary, however, if you do not input them, they will result to default
    values, which all are equal to 3.
 
@@ -14,3 +14,13 @@ This is a connect4 program in python.
    if you type in anything other than yes, it will go back to the game.
 
 I didn't really know how commenting on python would work, so on this particular project, there is no comments on any codings, but these are very similar to the ones I have done previously on C programming. 
+
+UPDATE:
+  there is also a new package called p4_mainG.py which includes the GUI with it. It uses pyqt4 and imports from testGUI.py, which is the
+  'engine' for the GUI. It has load and save functionality as well. You are able to use both the command line, by typing in the normal
+  above commands, or use the below command for gui.
+ 
+  to use this, you will need to type in:
+     ./p4_mainG.py -g
+
+  you can also load from a file from the command line, however, this technique will only work on the non GUI part.
