@@ -126,3 +126,5 @@ class exampleGUI(QtGui.QWidget):
     except IndexError:
       print "You must enter the file name."
       sys.exit(2)
+    except KeyError:
+      print "Incorrect File."
