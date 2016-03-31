@@ -13,14 +13,14 @@ class exampleGUI(QtGui.QWidget):
     self.win = win
     self.initUI()
   def initUI(self):
-    vbox = QtGui.QVBoxLayout()
+    self.vbox = QtGui.QVBoxLayout()
     self.grid = QtGui.QGridLayout()
     self.thelist = [[-1 for x in xrange(self.column)] for x in xrange(self.row)]
     self.labels = [[-1 for x in xrange(self.column)] for x in xrange(self.row)]
     
-    menubar = QtGui.QMenuBar(self)
-    menubar.setNativeMenuBar(False)
-    fileMenu = menubar.addMenu('&File')
+    self.menubar = QtGui.QMenuBar(self)
+    self.menubar.setNativeMenuBar(False)
+    fileMenu = self.menubar.addMenu('&File')
     exitAction = QtGui.QAction('&Exit',self)
     exitAction.triggered.connect(QtGui.qApp.quit)
     fileMenu.addAction(exitAction)
@@ -34,7 +34,7 @@ class exampleGUI(QtGui.QWidget):
     load.setShortcut('Ctrl+O')
     load.triggered.connect(self.openDialog)
     fileMenu.addAction(load)
-    vbox.addWidget(menubar, 0)
+    self.vbox.addWidget(self.menubar, 0)
 
     for i in range(self.column):
       button = QtGui.QPushButton('%d' % i)
@@ -48,8 +48,8 @@ class exampleGUI(QtGui.QWidget):
         self.labels[i][j].setAlignment(QtCore.Qt.AlignCenter)
         self.grid.addWidget(self.labels[i][j], i+2, j)
     
-    vbox.addLayout(self.grid) 
-    self.setLayout(vbox)
+    self.vbox.addLayout(self.grid) 
+    self.setLayout(self.vbox)
     self.setGeometry(300,300,250,150)
     self.setStyleSheet("background-color:white;")
     self.setWindowTitle('Connect4 in Python')
@@ -101,9 +101,11 @@ class exampleGUI(QtGui.QWidget):
       self.win = pickle.load(f)
       self.thelist = pickle.load(f)
       exampleGUI.turn = pickle.load(f)
-      self.repaint()
-      self.labels = [[-1 for x in xrange(self.column)] for x in xrange(self.row)]
-    
+      self.clearLayout() 
+      
+      self.labels = [[-1 for x in range(self.column)] for x in range(self.row)]
+     
+      self.vbox.addWidget(self.menubar, 0)
       for i in range(self.column):
         button = QtGui.QPushButton('%d' % i)
         button.setObjectName('%d' % i)
@@ -116,11 +118,14 @@ class exampleGUI(QtGui.QWidget):
           self.labels[i][j].setAlignment(QtCore.Qt.AlignCenter)
           self.grid.addWidget(self.labels[i][j], i+2, j)
     
+      self.vbox.addLayout(self.grid) 
+
       for x in xrange(self.row):
         for y in xrange(self.column):
           if self.thelist[x][y] <> -1:
             self.labels[x][y].setText('%d' % self.thelist[x][y])
 
+      self.repaint() 
     except IOError:
       print "File not found."
     except IndexError:
@@ -128,3 +133,13 @@ class exampleGUI(QtGui.QWidget):
       sys.exit(2)
     except KeyError:
       print "Incorrect File."
+
+  def clearLayout(self): 
+    for i in reversed(range(self.grid.count())):
+      item = self.grid.takeAt(i).widget()
+      if item is not None:
+        item.deleteLater()
+    for i in reversed(range(self.vbox.count())):
+      item = self.vbox.takeAt(i).widget()
+      if item is not None:
+        item.deleteLater()
